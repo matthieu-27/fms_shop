@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caveman Clothing Shop</title>
+    <script src="/shop.js" defer></script>
+    <link
+      rel="preconnect"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/style.css" rel="stylesheet" />
+    <script src="/js/bootstrap.bundle.min.js" defer></script>
+  </head>
+  <body>
+    <div
+      class="vw-100 h-5 bg-black d-flex flex-grow-0 p-1 justify-content-center dela-gothic-one-regular text-light align-items-center"
+    >
+      Free shipping over €59
+    </div>
+    <header
+      class="min-vw-100 d-flex justify-content-between align-items-center p-3 text-white"
+    >
+      <div class="m-0 p-0 w-fit">
+        <img
+          src="/assets/logo.caveman.png"
+          alt="Logo"
+          id="logo"
+          class="h-auto w-75"
+        />
+      </div>
+      <div class="luckiest-guy-regular text-black">
+        <ul class="list-unstyled m-0 p-0">
+          <li class="d-inline p-1 fs-6 d-none d-lg-inline">Street</li>
+          <li class="d-inline p-1 fs-6 d-none d-lg-inline">Water</li>
+          <li class="d-inline p-1 fs-6 d-none d-md-inline">Snow</li>
+          <li class="d-inline p-1 fs-6"><u> Clothing </u></li>
+          <li class="d-inline p-1 fs-6 d-none d-md-inline">Brands</li>
+        </ul>
+      </div>
+      <div class="d-flex align-items-center gap-1">
+        <i class="ph ph-user fs-2" style="color: black"></i>
+        <i class="ph ph-shopping-cart fs-2" style="color: black">
+          <section id="cartItems"></section>
+        </i>
+        <i class="ph ph-magnifying-glass fs-2" style="color: black"></i>
+      </div>
+    </header>
+    <main class="container d-flex flex-column my-4">
+      <aside id="searchBar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for products..."
+          class="form-control mb-3"
+        />
+      </aside>
+      <section id="productList">
+        <article class="card mb-4" style="max-width: 540px" data-product-id="1">
+          Test Product
+        </article>
+      </section>
+    </main>
+    <!-- <footer>
+      <div>
+        <div>Logo</div>
+        <div>Copyleft</div>
+      </div>
+    </footer> -->
+  </body>
+</html>

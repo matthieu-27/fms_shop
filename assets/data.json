@@ -1,0 +1,296 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "nom": "Hommes"
+        },
+        {
+            "id": 2,
+            "nom": "Femmes"
+        },
+        {
+            "id": 3,
+            "nom": "Enfants"
+        },
+        {
+            "id": 4,
+            "nom": "Accessoires"
+        },
+        {
+            "id": 5,
+            "nom": "Chaussures"
+        }
+    ],
+    "produits": [
+        {
+            "id": 1,
+            "nom": "T-shirt col rond",
+            "description": "T-shirt en coton, coupe classique, disponible en plusieurs couleurs.",
+            "categorie_id": 1,
+            "categorie_nom": "Hommes",
+            "image": "https://placehold.co/600x600?text=T-shirt+col+rond",
+            "prix": 75.11
+        },
+        {
+            "id": 2,
+            "nom": "Jeans slim",
+            "description": "Jeans stretch, coupe ajustée, idéal pour un look décontracté.",
+            "categorie_id": 1,
+            "categorie_nom": "Hommes",
+            "image": "https://placehold.co/600x600?text=Jeans+slim",
+            "prix": 12.56
+        },
+        {
+            "id": 3,
+            "nom": "Veste bomber",
+            "description": "Veste légère avec doublure, parfaite pour les saisons intermédiaires.",
+            "categorie_id": 1,
+            "categorie_nom": "Hommes",
+            "image": "https://placehold.co/600x600?text=Veste+bomber",
+            "prix": 59.76
+        },
+        {
+            "id": 4,
+            "nom": "Chemise à carreaux",
+            "description": "Chemise en coton, motif carreaux, pour un style casual ou habillé.",
+            "categorie_id": 1,
+            "categorie_nom": "Hommes",
+            "image": "https://placehold.co/600x600?text=Chemise+à+carreaux",
+            "prix": 59.03
+        },
+        {
+            "id": 5,
+            "nom": "Pullover col V",
+            "description": "Pullover en laine douce, col V, pour rester au chaud avec style.",
+            "categorie_id": 1,
+            "categorie_nom": "Hommes",
+            "image": "https://placehold.co/600x600?text=Pullover+col+V",
+            "prix": 32.2
+        },
+        {
+            "id": 6,
+            "nom": "Short de bain",
+            "description": "Short de bain rapide séchage, idéal pour la plage ou la piscine.",
+            "categorie_id": 1,
+            "categorie_nom": "Hommes",
+            "image": "https://placehold.co/600x600?text=Short+de+bain",
+            "prix": 48.72
+        },
+        {
+            "id": 7,
+            "nom": "Robe d'été",
+            "description": "Robe légère en lin, parfaite pour les journées ensoleillées.",
+            "categorie_id": 2,
+            "categorie_nom": "Femmes",
+            "image": "https://placehold.co/600x600?text=Robe+d'été",
+            "prix": 88.09
+        },
+        {
+            "id": 8,
+            "nom": "Blouse en soie",
+            "description": "Blouse élégante en soie, pour les occasions spéciales.",
+            "categorie_id": 2,
+            "categorie_nom": "Femmes",
+            "image": "https://placehold.co/600x600?text=Blouse+en+soie",
+            "prix": 65.45
+        },
+        {
+            "id": 9,
+            "nom": "Jupe pliée",
+            "description": "Jupe en coton, pliée, pour un look féminin et intemporel.",
+            "categorie_id": 2,
+            "categorie_nom": "Femmes",
+            "image": "https://placehold.co/600x600?text=Jupe+pliée",
+            "prix": 35.99
+        },
+        {
+            "id": 10,
+            "nom": "Pantalon droit",
+            "description": "Pantalon en tissu stretch, coupe droite, pour le bureau ou les sorties.",
+            "categorie_id": 2,
+            "categorie_nom": "Femmes",
+            "image": "https://placehold.co/600x600?text=Pantalon+droit",
+            "prix": 45.75
+        },
+        {
+            "id": 11,
+            "nom": "Manteau long",
+            "description": "Manteau en laine, long et chaud, pour affronter l'hiver.",
+            "categorie_id": 2,
+            "categorie_nom": "Femmes",
+            "image": "https://placehold.co/600x600?text=Manteau+long",
+            "prix": 99.99
+        },
+        {
+            "id": 12,
+            "nom": "Top sans manches",
+            "description": "Top en coton, sans manches, pour les journées chaudes.",
+            "categorie_id": 2,
+            "categorie_nom": "Femmes",
+            "image": "https://placehold.co/600x600?text=Top+sans+manches",
+            "prix": 22.3
+        },
+        {
+            "id": 13,
+            "nom": "T-shirt enfant",
+            "description": "T-shirt en coton doux, avec des motifs amusants pour enfants.",
+            "categorie_id": 3,
+            "categorie_nom": "Enfants",
+            "image": "https://placehold.co/600x600?text=T-shirt+enfant",
+            "prix": 15.99
+        },
+        {
+            "id": 14,
+            "nom": "Jeans enfant",
+            "description": "Jeans confortable et résistant, pour les enfants actifs.",
+            "categorie_id": 3,
+            "categorie_nom": "Enfants",
+            "image": "https://placehold.co/600x600?text=Jeans+enfant",
+            "prix": 25.5
+        },
+        {
+            "id": 15,
+            "nom": "Robe à smocks",
+            "description": "Robe en coton, avec smocks, pour les petites filles.",
+            "categorie_id": 3,
+            "categorie_nom": "Enfants",
+            "image": "https://placehold.co/600x600?text=Robe+à+smocks",
+            "prix": 28.75
+        },
+        {
+            "id": 16,
+            "nom": "Pullover enfant",
+            "description": "Pullover en laine douce, pour garder les enfants au chaud.",
+            "categorie_id": 3,
+            "categorie_nom": "Enfants",
+            "image": "https://placehold.co/600x600?text=Pullover+enfant",
+            "prix": 20.0
+        },
+        {
+            "id": 17,
+            "nom": "Short enfant",
+            "description": "Short en coton, léger et confortable pour l'été.",
+            "categorie_id": 3,
+            "categorie_nom": "Enfants",
+            "image": "https://placehold.co/600x600?text=Short+enfant",
+            "prix": 12.99
+        },
+        {
+            "id": 18,
+            "nom": "Combinaison bébé",
+            "description": "Combinaison douce et confortable pour les tout-petits.",
+            "categorie_id": 3,
+            "categorie_nom": "Enfants",
+            "image": "https://placehold.co/600x600?text=Combinaison+bébé",
+            "prix": 18.5
+        },
+        {
+            "id": 19,
+            "nom": "Écharpe en laine",
+            "description": "Écharpe douce en laine, pour rester au chaud en hiver.",
+            "categorie_id": 4,
+            "categorie_nom": "Accessoires",
+            "image": "https://placehold.co/600x600?text=Écharpe+en+laine",
+            "prix": 19.99
+        },
+        {
+            "id": 20,
+            "nom": "Bonnet",
+            "description": "Bonnet en laine, pour protéger du froid.",
+            "categorie_id": 4,
+            "categorie_nom": "Accessoires",
+            "image": "https://placehold.co/600x600?text=Bonnet",
+            "prix": 14.99
+        },
+        {
+            "id": 21,
+            "nom": "Ceinture en cuir",
+            "description": "Ceinture en cuir véritable, pour accessoiriser vos tenues.",
+            "categorie_id": 4,
+            "categorie_nom": "Accessoires",
+            "image": "https://placehold.co/600x600?text=Ceinture+en+cuir",
+            "prix": 29.99
+        },
+        {
+            "id": 22,
+            "nom": "Sac à main",
+            "description": "Sac à main élégant, en cuir synthétique, pour toutes les occasions.",
+            "categorie_id": 4,
+            "categorie_nom": "Accessoires",
+            "image": "https://placehold.co/600x600?text=Sac+à+main",
+            "prix": 99.64
+        },
+        {
+            "id": 23,
+            "nom": "Gants",
+            "description": "Gants en laine, pour garder vos mains au chaud.",
+            "categorie_id": 4,
+            "categorie_nom": "Accessoires",
+            "image": "https://placehold.co/600x600?text=Gants",
+            "prix": 94.27
+        },
+        {
+            "id": 24,
+            "nom": "Chapeau fedora",
+            "description": "Chapeau fedora, pour un look tendance et élégant.",
+            "categorie_id": 4,
+            "categorie_nom": "Accessoires",
+            "image": "https://placehold.co/600x600?text=Chapeau+fedora",
+            "prix": 52.35
+        },
+        {
+            "id": 25,
+            "nom": "Baskets",
+            "description": "Baskets confortables, pour le sport ou le quotidien.",
+            "categorie_id": 5,
+            "categorie_nom": "Chaussures",
+            "image": "https://placehold.co/600x600?text=Baskets",
+            "prix": 28.86
+        },
+        {
+            "id": 26,
+            "nom": "Bottes",
+            "description": "Bottes en cuir, pour affronter l'hiver avec style.",
+            "categorie_id": 5,
+            "categorie_nom": "Chaussures",
+            "image": "https://placehold.co/600x600?text=Bottes",
+            "prix": 30.71
+        },
+        {
+            "id": 27,
+            "nom": "Sandales",
+            "description": "Sandales légères, pour les journées d'été.",
+            "categorie_id": 5,
+            "categorie_nom": "Chaussures",
+            "image": "https://placehold.co/600x600?text=Sandales",
+            "prix": 84.19
+        },
+        {
+            "id": 28,
+            "nom": "Chaussures de ville",
+            "description": "Chaussures élégantes, pour le bureau ou les sorties.",
+            "categorie_id": 5,
+            "categorie_nom": "Chaussures",
+            "image": "https://placehold.co/600x600?text=Chaussures+de+ville",
+            "prix": 82.31
+        },
+        {
+            "id": 29,
+            "nom": "Tongs",
+            "description": "Tongs confortables, pour la plage ou la piscine.",
+            "categorie_id": 5,
+            "categorie_nom": "Chaussures",
+            "image": "https://placehold.co/600x600?text=Tongs",
+            "prix": 66.16
+        },
+        {
+            "id": 30,
+            "nom": "Chaussons",
+            "description": "Chaussons doux, pour rester confortable à la maison.",
+            "categorie_id": 5,
+            "categorie_nom": "Chaussures",
+            "image": "https://placehold.co/600x600?text=Chaussons",
+            "prix": 52.89
+        }
+    ]
+}

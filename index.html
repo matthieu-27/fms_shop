@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Caveman Clothing Shop</title>
-    <script src="/shop.js" defer></script>
+    <script src="/assets/shop.js" defer></script>
     <link
       rel="preconnect"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Luckiest+Guy&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Luckiest+Guy&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -32,58 +32,146 @@
   </head>
   <body>
     <div
+      id="trustPilot"
+      class="vw-100 bg-white d-flex flex-grow-0 p-2 justify-content-center luckiest-guy-regular text-light align-items-center"
+      style="max-height: 120px"
+    >
+      <img
+        src="/assets/trustpilot.svg"
+        alt="Trustpilot"
+        class="h-100 me-2 w-25"
+        style="max-height: 30px; max-width: 87px"
+      />
+      <span class="text-black text-capitalize fs-6 pt-2"
+        >explore the reviews</span
+      >
+    </div>
+    <div
+      id="freeShipping"
       class="vw-100 h-5 bg-black d-flex flex-grow-0 p-1 justify-content-center dela-gothic-one-regular text-light align-items-center"
     >
       Free shipping over €59
     </div>
     <header
-      class="min-vw-100 d-flex justify-content-between align-items-center p-3 text-white"
+      id="header"
+      class="container d-flex justify-content-between align-items-center p-3 text-white"
     >
       <div class="m-0 p-0 w-fit">
-        <img
-          src="/assets/logo.caveman.png"
-          alt="Logo"
-          id="logo"
-          class="h-auto w-75"
-        />
+        <a href="/">
+          <img
+            src="/assets/logo-caveman.png"
+            alt="Logo"
+            id="logo"
+            class="h-auto w-75"
+          />
+        </a>
       </div>
       <div class="luckiest-guy-regular text-black">
         <ul class="list-unstyled m-0 p-0">
-          <li class="d-inline p-1 fs-6 d-none d-lg-inline">Street</li>
+          <!-- <li class="d-inline p-1 fs-6 d-none d-lg-inline">Street</li>
           <li class="d-inline p-1 fs-6 d-none d-lg-inline">Water</li>
-          <li class="d-inline p-1 fs-6 d-none d-md-inline">Snow</li>
+          <li class="d-inline p-1 fs-6 d-none d-md-inline">Snow</li> -->
           <li class="d-inline p-1 fs-6"><u> Clothing </u></li>
-          <li class="d-inline p-1 fs-6 d-none d-md-inline">Brands</li>
+          <!-- <li class="d-inline p-1 fs-6 d-none d-md-inline">Brands</li> -->
         </ul>
       </div>
       <div class="d-flex align-items-center gap-1">
-        <i class="ph ph-user fs-2" style="color: black"></i>
-        <i class="ph ph-shopping-cart fs-2" style="color: black">
-          <section id="cartItems"></section>
-        </i>
-        <i class="ph ph-magnifying-glass fs-2" style="color: black"></i>
+        <button id="userProfile" type="button" class="btn btn-secondary">
+          Se connecter
+        </button>
+        <button
+          type="button"
+          class="btn btn-link text-decoration-none"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasShoppingCart"
+          aria-controls="offcanvasShoppingCart"
+        >
+          <i
+            id="shoppingCart"
+            class="ph ph-shopping-cart fs-3 position-relative"
+            style="color: black"
+          >
+            <span
+              id="shoppingCartBadge"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+            >
+            </span>
+          </i>
+        </button>
       </div>
     </header>
-    <main class="container d-flex flex-column my-4">
-      <aside id="searchBar">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search for products..."
-          class="form-control mb-3"
-        />
-      </aside>
-      <section id="productList">
-        <article class="card mb-4" style="max-width: 540px" data-product-id="1">
-          Test Product
-        </article>
-      </section>
-    </main>
-    <!-- <footer>
-      <div>
-        <div>Logo</div>
-        <div>Copyleft</div>
+    <main id="mainContainer" class="d-flex flex-column my-4">
+      <div id="categoriesContainer" class="mb-4 container">
+        <div
+          class="d-flex align-items-center mb-2 justify-content-between w-full"
+        >
+          <div
+            class="w-auto d-flex flex-row-reverse align-content-center gap-2 justify-content-center"
+          >
+            <select
+              id="categorySelect"
+              class="p-1 form-select"
+              style="min-width: 125px"
+            ></select>
+            <label for="categorySelect" class="pt-1">Catégorie</label>
+          </div>
+          <div class="w-auto d-inline-flex">
+            <span class="luckiest-guy-regular w-auto d-inline"
+              ><em id="numberOfProducts" class="d-inline">0</em> Products</span
+            >
+          </div>
+        </div>
       </div>
-    </footer> -->
+      <div class="mx-2">
+        <section
+          id="productList"
+          class="w-100 d-flex flex-wrap justify-content-between container gap-3"
+        ></section>
+      </div>
+      <div
+        class="offcanvas offcanvas-end"
+        data-bs-scroll="true"
+        tabindex="-1"
+        id="offcanvasShoppingCart"
+        aria-labelledby="offcanvasShoppingCartLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasShoppingCartLabel">
+            Panier d'Achats
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>
+            Try scrolling the rest of the page to see this option in action.
+          </p>
+        </div>
+      </div>
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div
+          id="liveToast"
+          class="toast"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div class="toast-header">
+            <strong id="toastTitle" class="me-auto">Bootstrap</strong>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div id="toastBody" class="toast-body"></div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

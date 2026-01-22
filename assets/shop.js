@@ -14,7 +14,7 @@ const elements = {
   mainContainer: document.getElementById("mainContainer"),
   categoriesContainer: document.getElementById("categoriesContainer"),
   userProfile: document.getElementById("userProfile"),
-  cartElement: document.getElementById("offcanvasShoppingCart"),
+  cartElement: document.getElementById("userShoppingCart"),
   trustPilot: document.getElementById("trustPilot"),
   freeShipping: document.getElementById("freeShipping"),
   header: document.getElementById("header"),
@@ -81,19 +81,25 @@ function renderShopView() {
 }
 
 function renderCategorySelect() {
-  // Effacer les options existantes (sauf la première si elle existe)
+  // Garder la première option (Tous les produits)
+  // Efface les autres lignes et construit à nouveau les options des catégories
   while (elements.categorySelect.options.length > 1) {
     elements.categorySelect.remove(1);
   }
 
   // Ajouter les catégories
   state.categories.forEach((category, idx) => {
+    if (idx === 0) {
+      // Ajouter une option "Tous les produits" au début
+      const allOption = document.createElement("option");
+      allOption.value = 0;
+      allOption.textContent = "Tous les produits";
+      elements.categorySelect.appendChild(allOption);
+    }
     const option = document.createElement("option");
     option.value = category.id;
     option.textContent = category.nom;
-    if (idx === 0) {
-      option.selected = true;
-    }
+
     elements.categorySelect.appendChild(option);
   });
 }
@@ -376,6 +382,18 @@ function setupEventListeners() {
       handleAddToCart(productId);
     }
   });
+
+  // Événement pour les boutons de suppression du panier
+  elements.cartElement.addEventListener("click", (e) => {
+    if (
+      e.target.classList.contains("remove-from-cart-btn") ||
+      e.target.closest(".remove-from-cart-btn")
+    ) {
+      const button = e.target.closest(".remove-from-cart-btn");
+      const productIndex = parseInt(button.dataset.productIndex);
+      handleRemoveFromCart(productIndex);
+    }
+  });
 }
 
 // 10. Handlers d'événements
@@ -408,7 +426,7 @@ function handleLogin() {
   if (username && password) {
     renderAdminView();
   } else {
-    alert("Veuillez remplir tous les champs");
+    toastMessage("Erreur", "Veuillez remplir tous les champs");
   }
 }
 
@@ -439,7 +457,7 @@ function handleSaveProduct(e) {
 
   // Validation
   if (!productName || !productPrice || !productImage || !productCategory) {
-    alert("Veuillez remplir tous les champs");
+    toastMessage("Erreur", "Veuillez remplir tous les champs");
     return;
   }
 
@@ -464,7 +482,7 @@ function handleSaveProduct(e) {
   localStorage.setItem("shop_products", JSON.stringify(state.products));
 
   // Retour à la vue admin
-  alert("Produit ajouté avec succès !");
+  toastMessage("Succès", "Produit ajouté avec succès !");
   renderAdminView();
 }
 
@@ -539,7 +557,7 @@ function handleDeleteSpecificProduct(productId) {
     state.products = state.products.filter((p) => p.id !== productId);
     localStorage.setItem("shop_products", JSON.stringify(state.products));
 
-    alert("Produit supprimé avec succès !");
+    toastMessage("Succès", "Produit supprimé avec succès !");
     renderDeleteProductView(); // Rafraîchir la vue
   }
 }
@@ -548,11 +566,36 @@ function handleAddToCart(productId) {
   const product = state.products.find((p) => p.id === productId);
   if (product) {
     state.shoppingCart.push(product);
-    toastMessage("Succès", `${product.nom} a été ajouté au panier.`, "alert");
+    toastMessage("Succès", `${product.nom} a été ajouté au panier.`);
+    updateShoppingCart();
   }
 }
 
-function toastMessage(title, message, type = "info") {
+function handleCartItemElement(product) {
+  const item = document.createElement("div");
+  item.className =
+    "cart-item d-flex justify-content-between align-items-center mb-2";
+  item.innerHTML = `
+    <div>
+      <h6 class="mb-0">${product.nom}</h6>
+      <small class="text-muted">€${product.prix}</small>
+    </div>
+    <button class="btn btn-sm btn-outline-danger remove-from-cart-btn" data-product-id="${product.id}">Retirer</button>
+  `;
+  return item;
+}
+
+// 10.7 Fonction pour supprimer un élément du panier
+function handleRemoveFromCart(productIndex) {
+  if (confirm("Êtes-vous sûr de vouloir retirer ce produit du panier ?")) {
+    state.shoppingCart.splice(productIndex, 1);
+    updateShoppingCart();
+    toastMessage("Succès", "Produit retiré du panier.");
+  }
+}
+
+// Fonction pour afficher un message toast Bootstrap
+function toastMessage(title, message) {
   const toast = document.getElementById("liveToast");
   const toastTitle = document.getElementById("toastTitle");
   const toastBody = document.getElementById("toastBody");
@@ -562,16 +605,72 @@ function toastMessage(title, message, type = "info") {
 
   // Ajouter la classe correspondante au type de toast
   toast.className = "toast";
-  if (type === "success") {
-    toast.classList.add("bg-success", "text-white");
-  } else if (type === "error") {
-    toast.classList.add("bg-danger", "text-white");
-  } else {
-    toast.classList.add("bg-info", "text-white");
-  }
+  toast.classList.add("align-items-center", "text-bg-dark", "border-0");
 
   const bsToast = new bootstrap.Toast(toast);
   bsToast.show();
+}
+
+// 10.5 Fonction pour mettre à jour le panier
+function updateShoppingCart() {
+  // Effacer le contenu actuel du panier
+  elements.cartElement.innerHTML = "";
+
+  // Vérifier si le panier est vide
+  if (state.shoppingCart.length === 0) {
+    elements.cartElement.innerHTML =
+      '<p class="text-center text-muted">Votre panier est vide</p>';
+    return;
+  }
+
+  // Calculer le total
+  let total = 0;
+
+  // Créer un élément pour chaque produit dans le panier
+  state.shoppingCart.forEach((product, index) => {
+    const item = document.createElement("div");
+    item.className =
+      "cart-item d-flex justify-content-between align-items-center mb-2 p-2 border rounded";
+    item.innerHTML = `
+      <div class="d-flex align-items-center gap-2">
+        <img src="${product.image}" alt="${product.nom}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+        <div>
+          <h6 class="mb-0">${product.nom}</h6>
+          <small class="text-muted">€${product.prix}</small>
+        </div>
+      </div>
+      <button class="btn btn-sm btn-outline-danger remove-from-cart-btn" data-product-index="${index}">
+        <i class="ph ph-trash"></i>
+      </button>
+    `;
+    elements.cartElement.appendChild(item);
+    total += product.prix;
+  });
+
+  // Ajouter le total
+  const totalElement = document.createElement("div");
+  totalElement.className =
+    "mt-3 pt-2 border-top d-flex justify-content-between align-items-center";
+  totalElement.innerHTML = `
+    <strong>Total:</strong>
+    <strong>€${total.toFixed(2)}</strong>
+  `;
+  elements.cartElement.appendChild(totalElement);
+
+  // Mettre à jour le badge du panier
+  updateCartBadge();
+}
+
+// 10.6 Fonction pour mettre à jour le badge du panier
+function updateCartBadge() {
+  const count = state.shoppingCart.length;
+  if (count > 0) {
+    elements.cartBadge.textContent = count;
+    elements.cartBadge.classList.add("bg-dark", "text-white", "fs-6");
+    elements.cartBadge.style.display = "inline-block";
+  } else {
+    elements.cartBadge.style.display = "none";
+  }
 }
 
 // 11. Démarrage de l'application

@@ -1,0 +1,25 @@
+@startuml
+
+class User
+class Admin
+class Product
+Class Category
+class Order
+
+
+User "1" -down- "0..*" Order : places
+Admin -down-|> User : inherits
+Order "1" -right- "1..*" Product : contains
+Product "0..*" -right- "1" Category : belongs to
+
+
+note right of Admin
+  Admin à access a l'interface d'administration
+  pour gérer les produits. (CRUD DE Product)
+end note
+note left of User
+  User peut ajouter des produits à son panier
+  et effacer le contenu de son panier.
+end note
+
+@enduml

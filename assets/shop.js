@@ -668,6 +668,19 @@ function updateShoppingCart() {
   });
   elements.cartElement.appendChild(checkoutButton);
 
+  // Ajouter un bouton pour vider le panier
+  const clearCartButton = document.createElement("button");
+  clearCartButton.className = "btn btn-sm btn-outline-secondary mt-3 w-100";
+  clearCartButton.textContent = "Vider le panier";
+  clearCartButton.addEventListener("click", () => {
+    if (confirm("Êtes-vous sûr de vouloir vider le panier ?")) {
+      state.shoppingCart = [];
+      updateShoppingCart();
+      toastMessage("Succès", "Le panier a été vidé.");
+    }
+  });
+  elements.cartElement.appendChild(clearCartButton);
+
   // Mettre à jour le badge du panier
   updateCartBadge();
 }

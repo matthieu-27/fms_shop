@@ -657,6 +657,17 @@ function updateShoppingCart() {
   `;
   elements.cartElement.appendChild(totalElement);
 
+  // Ajouter un bouton de fake paiement
+  const checkoutButton = document.createElement("button");
+  checkoutButton.className = "btn btn-dark btn-lg mt-3 w-100";
+  checkoutButton.textContent = "Passer à la caisse";
+  checkoutButton.addEventListener("click", () => {
+    toastMessage("Succès", "Fonction de paiement non implémentée.");
+    state.shoppingCart = [];
+    updateShoppingCart();
+  });
+  elements.cartElement.appendChild(checkoutButton);
+
   // Mettre à jour le badge du panier
   updateCartBadge();
 }
@@ -666,7 +677,12 @@ function updateCartBadge() {
   const count = state.shoppingCart.length;
   if (count > 0) {
     elements.cartBadge.textContent = count;
-    elements.cartBadge.classList.add("bg-dark", "text-white", "fs-6");
+    elements.cartBadge.classList.add(
+      "bg-dark",
+      "text-white",
+      "fs-6",
+      "luckiest-guy-regular",
+    );
     elements.cartBadge.style.display = "inline-block";
   } else {
     elements.cartBadge.style.display = "none";

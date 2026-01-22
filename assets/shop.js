@@ -711,15 +711,37 @@ function updateShoppingCart() {
   checkoutButton.className = "btn btn-dark btn-lg mt-3 w-100";
   checkoutButton.textContent = "Passer à la caisse";
   checkoutButton.addEventListener("click", () => {
-    toastMessage("Succès", "Fonction de paiement non implémentée.");
-    mainContainer.innerHTML = `
-      <div class="position-absolute top-0 start-0 w-100 h-100">
-        <img src="/assets/bsod.png" alt="Blue Screen of Death" class="w-100 vh-100 object-fit-cover"/>
-      </div>
-    `;
-    state.shoppingCart = [];
-    state.shoppingCart = [];
-    updateShoppingCart();
+    // Désactiver le bouton pour éviter les clics multiples
+    checkoutButton.disabled = true;
+    checkoutButton.textContent = "Traitement en cours...";
+
+    // Créer un élément de chargement
+    const loadingElement = document.createElement("div");
+    loadingElement.className = "text-center mt-3";
+    loadingElement.innerHTML = `
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+    <p class="mt-2 text-light">Connexion au serveur de paiement...</p>
+  `;
+    elements.cartElement.appendChild(loadingElement);
+
+    // Premier setTimeout pour le message de succès
+    setTimeout(() => {
+      toastMessage("Succès", "Paiement effectué avec succès !");
+
+      // Deuxième setTimeout pour le BSOD après 2 secondes supplémentaires
+      setTimeout(() => {
+        mainContainer.innerHTML = `
+        <div class="position-absolute top-0 start-0 w-100 h-100">
+          <img src="/assets/bsod.png" alt="Blue Screen of Death"
+               class="w-100 vh-100 object-fit-cover"/>
+        </div>
+      `;
+        state.shoppingCart = [];
+        updateShoppingCart();
+      }, 2000); // 2 secondes après le message de succès
+    }, 1500); // 1,5 secondes pour le message de succès
   });
   elements.cartElement.appendChild(checkoutButton);
 

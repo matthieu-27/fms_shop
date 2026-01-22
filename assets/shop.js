@@ -393,6 +393,26 @@ function setupEventListeners() {
       const productIndex = parseInt(button.dataset.productIndex);
       handleRemoveFromCart(productIndex);
     }
+
+    // Événement pour les boutons d'augmentation de quantité
+    if (
+      e.target.classList.contains("increase-quantity-btn") ||
+      e.target.closest(".increase-quantity-btn")
+    ) {
+      const button = e.target.closest(".increase-quantity-btn");
+      const productIndex = parseInt(button.dataset.productIndex);
+      handleIncreaseQuantity(productIndex);
+    }
+
+    // Événement pour les boutons de diminution de quantité
+    if (
+      e.target.classList.contains("decrease-quantity-btn") ||
+      e.target.closest(".decrease-quantity-btn")
+    ) {
+      const button = e.target.closest(".decrease-quantity-btn");
+      const productIndex = parseInt(button.dataset.productIndex);
+      handleDecreaseQuantity(productIndex);
+    }
   });
 }
 
@@ -565,22 +585,43 @@ function handleDeleteSpecificProduct(productId) {
 function handleAddToCart(productId) {
   const product = state.products.find((p) => p.id === productId);
   if (product) {
-    state.shoppingCart.push(product);
-    toastMessage("Succès", `${product.nom} a été ajouté au panier.`);
+    // Vérifier si le produit existe déjà dans le panier
+    const existingItem = state.shoppingCart.find(
+      (item) => item.product.id === product.id,
+    );
+
+    if (existingItem) {
+      // Si le produit existe, augmenter la quantité
+      existingItem.quantity += 1;
+      toastMessage("Succès", `Quantité de ${product.nom} augmentée.`);
+    } else {
+      // Sinon, ajouter le produit avec une quantité de 1
+      state.shoppingCart.push({ product: product, quantity: 1 });
+      toastMessage("Succès", `${product.nom} a été ajouté au panier.`);
+    }
+
     updateShoppingCart();
   }
 }
 
-function handleCartItemElement(product) {
+function handleCartItemElement(product, quantity, index) {
   const item = document.createElement("div");
-  item.className =
-    "cart-item d-flex justify-content-between align-items-center mb-2";
+  item.className = "cart-item d-flex flex-column mb-3 p-3 border rounded";
   item.innerHTML = `
-    <div>
-      <h6 class="mb-0">${product.nom}</h6>
-      <small class="text-muted">€${product.prix}</small>
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div>
+        <h6 class="mb-0">${product.nom}</h6>
+        <small class="text-muted">€${product.prix} x ${quantity} = €${(product.prix * quantity).toFixed(2)}</small>
+      </div>
+      <button class="btn btn-sm btn-outline-danger remove-from-cart-btn" data-product-index="${index}">
+        <i class="ph ph-trash"></i>
+      </button>
     </div>
-    <button class="btn btn-sm btn-outline-danger remove-from-cart-btn" data-product-id="${product.id}">Retirer</button>
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-sm btn-outline-secondary decrease-quantity-btn" data-product-index="${index}">-</button>
+      <span class="quantity-display">${quantity}</span>
+      <button class="btn btn-sm btn-outline-secondary increase-quantity-btn" data-product-index="${index}">+</button>
+    </div>
   `;
   return item;
 }
@@ -591,6 +632,27 @@ function handleRemoveFromCart(productIndex) {
     state.shoppingCart.splice(productIndex, 1);
     updateShoppingCart();
     toastMessage("Succès", "Produit retiré du panier.");
+  }
+}
+
+// 10.8 Fonction pour augmenter la quantité d'un produit
+function handleIncreaseQuantity(productIndex) {
+  state.shoppingCart[productIndex].quantity += 1;
+  updateShoppingCart();
+  toastMessage("Succès", "Quantité augmentée.");
+}
+
+// 10.9 Fonction pour diminuer la quantité d'un produit
+function handleDecreaseQuantity(productIndex) {
+  if (state.shoppingCart[productIndex].quantity > 1) {
+    state.shoppingCart[productIndex].quantity -= 1;
+    updateShoppingCart();
+    toastMessage("Succès", "Quantité diminuée.");
+  } else {
+    // Si la quantité est 1, proposer de supprimer l'article
+    if (confirm("Voulez-vous supprimer cet article du panier ?")) {
+      handleRemoveFromCart(productIndex);
+    }
   }
 }
 
@@ -626,25 +688,12 @@ function updateShoppingCart() {
   // Calculer le total
   let total = 0;
 
-  // Créer un élément pour chaque produit dans le panier
-  state.shoppingCart.forEach((product, index) => {
-    const item = document.createElement("div");
-    item.className =
-      "cart-item d-flex justify-content-between align-items-center mb-2 p-2 border rounded";
-    item.innerHTML = `
-      <div class="d-flex align-items-center gap-2">
-        <img src="${product.image}" alt="${product.nom}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
-        <div>
-          <h6 class="mb-0">${product.nom}</h6>
-          <small class="text-muted">€${product.prix}</small>
-        </div>
-      </div>
-      <button class="btn btn-sm btn-outline-danger remove-from-cart-btn" data-product-index="${index}">
-        <i class="ph ph-trash"></i>
-      </button>
-    `;
-    elements.cartElement.appendChild(item);
-    total += product.prix;
+  state.shoppingCart.forEach((cartItem, index) => {
+    const product = cartItem.product;
+    const quantity = cartItem.quantity;
+    const itemElement = handleCartItemElement(product, quantity, index);
+    elements.cartElement.appendChild(itemElement);
+    total += product.prix * quantity;
   });
 
   // Ajouter le total

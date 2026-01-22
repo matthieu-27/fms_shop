@@ -715,17 +715,6 @@ function updateShoppingCart() {
     checkoutButton.disabled = true;
     checkoutButton.textContent = "Traitement en cours...";
 
-    // Créer un élément de chargement
-    const loadingElement = document.createElement("div");
-    loadingElement.className = "text-center mt-3";
-    loadingElement.innerHTML = `
-    <div class="spinner-border text-light" role="status">
-      <span class="visually-hidden">Chargement...</span>
-    </div>
-    <p class="mt-2 text-light">Connexion au serveur de paiement...</p>
-  `;
-    elements.cartElement.appendChild(loadingElement);
-
     // Premier setTimeout pour le message de succès
     setTimeout(() => {
       toastMessage("Succès", "Paiement effectué avec succès !");

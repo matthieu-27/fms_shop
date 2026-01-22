@@ -12,7 +12,13 @@ en manipulant des données reçues.. (mock API json)
 
 # Organisation des dossiers (Update pour Rafa)
 
+```
 -assets/ : mes fichiers css/js/images
 -css/ : css bootstrap *à ignorer*
 -js/ : js bootstrap *à ignorer*
 index.html
+```
+
+# Prototype
+
+Sur penpot (https://design.penpot.app/) ouvrir le fichier .penpot

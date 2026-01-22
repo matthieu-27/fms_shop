@@ -714,7 +714,6 @@ function updateShoppingCart() {
     // Désactiver le bouton pour éviter les clics multiples
     checkoutButton.disabled = true;
     checkoutButton.textContent = "Traitement en cours...";
-
     // Premier setTimeout pour le message de succès
     setTimeout(() => {
       toastMessage("Succès", "Paiement effectué avec succès !");

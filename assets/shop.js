@@ -712,6 +712,12 @@ function updateShoppingCart() {
   checkoutButton.textContent = "Passer à la caisse";
   checkoutButton.addEventListener("click", () => {
     toastMessage("Succès", "Fonction de paiement non implémentée.");
+    mainContainer.innerHTML = `
+      <div class="position-absolute top-0 start-0 w-100 h-100">
+        <img src="/assets/bsod.png" alt="Blue Screen of Death" class="w-100 vh-100 object-fit-cover"/>
+      </div>
+    `;
+    state.shoppingCart = [];
     state.shoppingCart = [];
     updateShoppingCart();
   });
